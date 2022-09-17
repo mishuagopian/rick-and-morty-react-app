@@ -2,6 +2,7 @@ export const styles = {
   tabs: (theme: any) => ({
     margin: "auto",
     marginTop: 4,
+    paddingBottom: "40px",
     [theme.breakpoints.up("sm")]: {
       maxWidth: "75%",
     },
@@ -10,4 +11,10 @@ export const styles = {
       marginRight: 3,
     },
   }),
+  divider: {
+    marginBottom: 2,
+  },
+  loading: {
+    paddingBottom: "200px",
+  },
 };

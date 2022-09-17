@@ -13,4 +13,7 @@ export const styles = {
     fontWeight: "bold",
     textTransform: "capitalize",
   },
+  center: {
+    textAlign: "center",
+  },
 };

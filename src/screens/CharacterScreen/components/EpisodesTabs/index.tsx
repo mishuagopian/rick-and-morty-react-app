@@ -1,37 +1,77 @@
-import React, { useCallback, useState } from "react";
-import { useSelector } from "react-redux";
-import { Tabs, Tab } from "@mui/material";
+import React, { useCallback, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Divider, Tabs, Tab, useTheme } from "@mui/material";
 
-import { RootState } from "../../../../app/store";
+import { AppDispatch, RootState } from "../../../../app/store";
+import { getEpisode } from "../../../../feature/characterSlice";
 
 import { styles } from "./styles";
+import Description from "../Description";
 
 const EpisodesTabs = (): JSX.Element | null => {
+  const theme = useTheme();
+  const dispatch = useDispatch<AppDispatch>();
+
   const [episodeIndex, setEpisodeIndex] = useState(0);
   const { episode: episodes } = useSelector(
     (state: RootState) => state.character.value
   );
+  const episode = useSelector((state: RootState) => state.character.episode);
+  const episodeLoading = useSelector(
+    (state: RootState) => state.character.episodeLoading
+  );
 
-  const handleClick = useCallback((_: any, index: number) => {
-    setEpisodeIndex(index);
-  }, []);
+  const handleClick = useCallback(
+    (_: any, index: number) => {
+      if (episodeLoading) return;
+      setEpisodeIndex(index);
+      dispatch(getEpisode(episodes[index]));
+    },
+    [dispatch, episodes, episodeLoading]
+  );
+
+  useEffect(() => {
+    if (episodes?.length) {
+      dispatch(getEpisode(episodes[0]));
+    }
+  }, [dispatch, episodes]);
 
   if (!episodes?.length) return null;
 
+  const loadingStyles = episodeLoading ? styles.loading : {};
+
   return (
-    <Tabs
-      sx={styles.tabs}
-      value={episodeIndex}
-      onChange={handleClick}
-      variant="scrollable"
-      scrollButtons
-      allowScrollButtonsMobile
-      aria-label="episodes tabs"
-    >
-      {episodes.map((episode, index) => (
-        <Tab key={episode} label={`Episode ${index + 1}`} />
-      ))}
-    </Tabs>
+    <Box sx={{ ...styles.tabs(theme), ...loadingStyles }}>
+      <Tabs
+        value={episodeIndex}
+        onChange={handleClick}
+        variant="scrollable"
+        scrollButtons
+        allowScrollButtonsMobile
+        aria-label="episodes tabs"
+      >
+        {episodes.map((currentEpisode, index) => (
+          <Tab
+            disabled={episodeLoading}
+            key={currentEpisode}
+            label={`Episode ${index + 1}`}
+          />
+        ))}
+      </Tabs>
+      <Divider sx={styles.divider} />
+      {!episodeLoading && (
+        <>
+          <Description center title="Episode ID" value={episode.id} />
+          <Description center title="Episode Name" value={episode.name} />
+          <Description
+            center
+            title="Episode Air Date"
+            value={episode.air_date}
+          />
+          <Description center title="Episode Code" value={episode.episode} />
+        </>
+      )}
+    </Box>
   );
 };
 

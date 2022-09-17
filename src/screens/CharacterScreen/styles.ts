@@ -11,13 +11,13 @@ export const styles = {
     marginTop: "50px",
   },
   description: (theme: any) => ({
-    alignSelf: "center",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     [theme.breakpoints.down("sm")]: {
       alignItems: "center",
       marginTop: 5,
+      textAlign: "center",
     },
   }),
 };

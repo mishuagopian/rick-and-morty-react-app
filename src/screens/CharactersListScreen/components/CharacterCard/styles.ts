@@ -8,7 +8,17 @@ export const styles = {
     maxWidth: 260,
   },
   cardActionArea: {
+    alignItems: "start",
+    display: "flex",
     flex: 1,
     flexGrow: 1,
+    flexDirection: "column",
+  },
+  cardContent: {
+    alignItems: "start",
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: 1,
+    justifyContent: "space-evenly",
   },
 };

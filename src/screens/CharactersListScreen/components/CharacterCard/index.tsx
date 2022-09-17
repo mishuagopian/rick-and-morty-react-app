@@ -27,7 +27,7 @@ const CharacterCard = ({
   <Card sx={styles.card}>
     <CardActionArea sx={styles.cardActionArea}>
       <CardMedia component="img" image={image} alt={name} height="240" />
-      <CardContent>
+      <CardContent sx={styles.cardContent}>
         <Typography gutterBottom variant="h5">
           {name}
         </Typography>

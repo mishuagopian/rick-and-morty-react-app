@@ -5,10 +5,12 @@ import { Box, Pagination, useMediaQuery, useTheme } from "@mui/material";
 import { getCharacters, setPage } from "../../feature/charactersSlice";
 import { AppDispatch, RootState } from "../../app/store";
 import PageContainer from "../../components/PageContainer";
+import ScrollToTop from "../../components/ScrollToTop";
 
 import ResponsiveDrawer from "./components/ResponsiveDrawer";
-import { drawerWidth } from "./components/ResponsiveDrawer/styles";
 import CharacterCard from "./components/CharacterCard";
+
+import { drawerWidth } from "./components/ResponsiveDrawer/styles";
 import { styles } from "./styles";
 
 const CharactersListScreen = (): JSX.Element => {
@@ -20,6 +22,7 @@ const CharactersListScreen = (): JSX.Element => {
     (state: RootState) => state.characters.currentPage
   );
   const loading = useSelector((state: RootState) => state.characters.loading);
+  const scrollToTopAnchorId = "scroll-to-top-anchor";
 
   const theme = useTheme();
   const responsive = useMediaQuery(theme.breakpoints.up("sm"));
@@ -38,6 +41,7 @@ const CharactersListScreen = (): JSX.Element => {
   return (
     // TODO: Implement Left button to open Responsive Drawer
     <PageContainer>
+      <div id={scrollToTopAnchorId} />
       <ResponsiveDrawer />
       <Box sx={styles.container(responsive, drawerWidth)}>
         <Box sx={styles.list}>
@@ -62,6 +66,7 @@ const CharactersListScreen = (): JSX.Element => {
           disabled={loading}
         />
       </Box>
+      <ScrollToTop anchorSelector={`#${scrollToTopAnchorId}`} />
     </PageContainer>
   );
 };

@@ -12,6 +12,8 @@ export const styles = {
     flexWrap: "wrap",
   },
   pagination: {
-    marginTop: "25px",
+    backdropFilter: "blur(5px)",
+    position: "fixed",
+    bottom: 5,
   },
 };

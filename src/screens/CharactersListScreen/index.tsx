@@ -6,8 +6,10 @@ import { getCharacters } from "../../feature/charactersSlice";
 import { AppDispatch, RootState } from "../../app/store";
 import PageContainer from "../../components/PageContainer";
 
-import ResponsiveDrawer, { drawerWidth } from "./components/ResponsiveDrawer";
+import ResponsiveDrawer from "./components/ResponsiveDrawer";
+import { drawerWidth } from "./components/ResponsiveDrawer/styles";
 import CharacterCard from "./components/CharacterCard";
+import { styles } from "./styles";
 
 const CharactersListScreen = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,13 +26,7 @@ const CharactersListScreen = (): JSX.Element => {
     // TODO: Implement Left button to open Responsive Drawer
     <PageContainer>
       <ResponsiveDrawer />
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          paddingLeft: responsive ? drawerWidth : 0,
-        }}
-      >
+      <Box sx={styles.list(responsive, drawerWidth)}>
         {characters.map(({ id, name, status, species, image }) => (
           <CharacterCard
             key={id}

@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import rickAndMortyPng from "../../assets/rick-and-morty.png";
 import { homePath } from "../../constants/routes";
 
+import { styles } from "./styles";
+
 interface AppBarProps {
   LeftComponent?: React.ReactNode;
 }
@@ -12,20 +14,13 @@ interface AppBarProps {
 export const appBarHeight = "64px";
 
 const AppBar = ({ LeftComponent }: AppBarProps): JSX.Element => (
-  <MaterialAppBar
-    sx={{
-      alignItems: "center",
-      flex: 1,
-      justifyContent: "center",
-      zIndex: (theme) => theme.zIndex.drawer + 1,
-    }}
-  >
+  <MaterialAppBar sx={styles.appBar}>
     <Toolbar>
       {LeftComponent}
       <Link to={homePath}>
         <Box
           component="img"
-          sx={{ height: 50 }}
+          sx={styles.image}
           alt="Rick And Morty"
           src={rickAndMortyPng}
         />

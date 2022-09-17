@@ -9,6 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 
+import { styles } from "./styles";
+
 interface CharacterCardProps {
   name: string;
   status: "Alive" | "Dead" | "unknown";
@@ -22,17 +24,8 @@ const CharacterCard = ({
   species,
   image,
 }: CharacterCardProps): JSX.Element => (
-  <Card
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      boxShadow: 2,
-      margin: 2,
-      minWidth: 260,
-      maxWidth: 260,
-    }}
-  >
-    <CardActionArea sx={{ flex: 1, flexGrow: 1 }}>
+  <Card sx={styles.card}>
+    <CardActionArea sx={styles.cardActionArea}>
       <CardMedia component="img" image={image} alt={name} height="240" />
       <CardContent>
         <Typography gutterBottom variant="h5">

@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 
 import { appBarHeight } from "../../../../components/AppBar";
 
-export const drawerWidth = "240px";
+import { styles } from "./styles";
 
 const ResponsiveDrawer = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -32,14 +32,7 @@ const ResponsiveDrawer = () => {
 
   return (
     <Box sx={{ flex: 1 }}>
-      <Box
-        component="nav"
-        sx={{
-          width: { sm: drawerWidth },
-          flexShrink: { sm: 0 },
-        }}
-        aria-label="mailbox folders"
-      >
+      <Box component="nav" sx={styles.nav} aria-label="mailbox folders">
         <Drawer
           variant="temporary"
           open={mobileOpen}
@@ -47,28 +40,11 @@ const ResponsiveDrawer = () => {
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-            zIndex: (theme) => theme.zIndex.drawer + 2,
-          }}
+          sx={styles.temporary}
         >
           {drawer}
         </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
+        <Drawer variant="permanent" sx={styles.permanent} open>
           {drawer}
         </Drawer>
       </Box>

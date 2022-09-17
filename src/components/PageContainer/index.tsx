@@ -2,6 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 
 import AppBar, { appBarHeight } from "../AppBar";
+import { styles } from "./styles";
 
 interface PageContainerProps {
   children?: React.ReactNode;
@@ -14,7 +15,7 @@ const PageContainer = ({
 }: PageContainerProps): JSX.Element => (
   <>
     <AppBar LeftComponent={LeftComponent} />
-    <Box component="main" sx={{ flex: 1, paddingTop: appBarHeight }}>
+    <Box component="main" sx={styles(appBarHeight)}>
       {children}
     </Box>
   </>

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
     "format": "prettier --write src/**/*.ts{,x}",
     "start": "react-scripts start",
@@ -37,9 +38,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  
   },
   "devDependencies": {
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "eslint": "^8.23.0",

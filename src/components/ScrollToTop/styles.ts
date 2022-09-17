@@ -1,7 +1,7 @@
 export const styles = {
   button: (fullscreen: boolean) => ({
     position: "fixed",
-    bottom: fullscreen ? 16 : 42,
+    bottom: fullscreen ? 12 : 54,
     right: 16,
   }),
 };

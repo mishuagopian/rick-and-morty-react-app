@@ -1,12 +1,13 @@
 import React, { useCallback } from "react";
 import {
   Box,
-  Button,
+  Fab,
   Fade,
   useScrollTrigger,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import { styles } from "./styles";
 
@@ -39,7 +40,9 @@ const ScrollToTop = ({ anchorSelector }: ScrollToTopProps): JSX.Element => {
   return (
     <Fade in={trigger}>
       <Box onClick={handleClick} sx={styles.button(fullscreen)}>
-        <Button variant="contained">Take me up!</Button>
+        <Fab size="small" color="primary" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
       </Box>
     </Fade>
   );

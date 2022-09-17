@@ -15,9 +15,9 @@ export const styles = {
   },
   pagination: {
     alignSelf: "center",
-    backdropFilter: "blur(5px)",
+    backdropFilter: "blur(10px)",
     position: "fixed",
-    bottom: 5,
+    bottom: 12,
   },
   error: {
     margin: 5,

@@ -7,7 +7,8 @@ import { AppDispatch, RootState } from "../../app/store";
 import { getCharacter } from "../../feature/characterSlice";
 
 import PageContainer from "../../components/PageContainer";
-import Description from "./Description";
+import Description from "./components/Description";
+import EpisodesTabs from "./components/EpisodesTabs";
 
 import { styles } from "./styles";
 
@@ -15,7 +16,6 @@ const CharacterScreen = (): JSX.Element => {
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   const character = useSelector((state: RootState) => state.character.value);
-  console.log(character);
 
   useEffect(() => {
     dispatch(getCharacter(id));
@@ -46,6 +46,7 @@ const CharacterScreen = (): JSX.Element => {
           <Description title="Creation date" value={character.created} />
         </Box>
       </Container>
+      <EpisodesTabs />
     </PageContainer>
   );
 };

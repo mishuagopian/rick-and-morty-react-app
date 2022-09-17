@@ -2,9 +2,7 @@ import React from "react";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 import PageContainer from "../../components/PageContainer";
-import ResponsiveDrawer, {
-  drawerWidth,
-} from "../../components/ResponsiveDrawer";
+import ResponsiveDrawer, { drawerWidth } from "./components/ResponsiveDrawer";
 
 const CharactersListScreen = (): JSX.Element => {
   const theme = useTheme();

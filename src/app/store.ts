@@ -1,6 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+
+import charactersReducer from "../feature/charactersSlice";
+
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    characters: charactersReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

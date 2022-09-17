@@ -7,13 +7,6 @@ export const styles = {
     minWidth: 260,
     maxWidth: 260,
   },
-  cardActionArea: {
-    alignItems: "start",
-    display: "flex",
-    flex: 1,
-    flexGrow: 1,
-    flexDirection: "column",
-  },
   cardContent: {
     alignItems: "start",
     display: "flex",

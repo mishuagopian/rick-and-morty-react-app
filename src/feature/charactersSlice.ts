@@ -44,7 +44,6 @@ export const getCharacters = createAsyncThunk(
     try {
       const { characters } = thunkAPI.getState() as RootState;
       const { currentPage, filters } = characters;
-      console.log(filters);
 
       const { info, results } = await fetchCharacters(filters, currentPage);
       return { info, results } as GetCharactersResponse;

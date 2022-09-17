@@ -27,3 +27,10 @@ export const getCharacters = async (
   url = filters.gender ? `${url}&gender=${filters.gender.toLowerCase()}` : url;
   return axios.get(url).then(({ data }) => data);
 };
+
+export const getCharacter = async (
+  id: string | number | undefined
+): Promise<Character> => {
+  const url = `${API_URL}/character/${id}`;
+  return axios.get(url).then(({ data }) => data);
+};

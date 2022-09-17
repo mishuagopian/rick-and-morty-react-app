@@ -14,4 +14,7 @@ export const styles = {
     flexGrow: 1,
     justifyContent: "space-evenly",
   },
+  image: {
+    cursor: "pointer",
+  },
 };

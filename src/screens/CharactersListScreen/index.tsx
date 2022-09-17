@@ -76,8 +76,6 @@ const CharactersListScreen = (): JSX.Element => {
                 page={currentPage}
                 count={pagesInfo.pages}
                 onChange={handlePageChange}
-                showFirstButton
-                showLastButton
                 color="primary"
                 disabled={loading}
               />

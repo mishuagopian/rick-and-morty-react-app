@@ -34,7 +34,14 @@ const CharacterCard = ({
 
   return (
     <Card sx={styles.card}>
-      <CardMedia component="img" image={image} alt={name} height="240" />
+      <CardMedia
+        onClick={handleClick}
+        component="img"
+        image={image}
+        alt={name}
+        height="240"
+        sx={styles.image}
+      />
       <CardContent sx={styles.cardContent}>
         <Typography gutterBottom variant="h5">
           {name}

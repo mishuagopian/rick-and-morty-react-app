@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Pagination, useMediaQuery, useTheme } from "@mui/material";
 
-// eslint-disable-next-line import/named
 import { getCharacters, setPage } from "../../feature/charactersSlice";
 import { AppDispatch, RootState } from "../../app/store";
 import PageContainer from "../../components/PageContainer";
@@ -16,6 +15,7 @@ const CharactersListScreen = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
   const characters = useSelector((state: RootState) => state.characters.values);
   const pagesInfo = useSelector((state: RootState) => state.characters.info);
+  const filters = useSelector((state: RootState) => state.characters.filters);
   const currentPage = useSelector(
     (state: RootState) => state.characters.currentPage
   );
@@ -25,7 +25,7 @@ const CharactersListScreen = (): JSX.Element => {
   const responsive = useMediaQuery(theme.breakpoints.up("sm"));
 
   const handlePageChange = useCallback(
-    (_event: any, page: number) => {
+    (_event: React.ChangeEvent<unknown>, page: number) => {
       dispatch(setPage(page));
     },
     [dispatch]
@@ -33,7 +33,7 @@ const CharactersListScreen = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(getCharacters());
-  }, [dispatch, currentPage]);
+  }, [dispatch, currentPage, filters]);
 
   return (
     // TODO: Implement Left button to open Responsive Drawer

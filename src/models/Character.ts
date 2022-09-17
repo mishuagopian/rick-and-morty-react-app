@@ -8,13 +8,19 @@ export interface Location {
   link: string;
 }
 
+export const status = ["Alive", "Dead", "unknown"] as const;
+export type CharacterStatus = typeof status[number];
+
+export const genders = ["Female", "Male", "Genderless", "unknown"] as const;
+export type CharacterGender = typeof genders[number];
+
 export interface Character {
   id: number;
   name: string;
-  status: "Alive" | "Dead" | "unknown";
+  status: CharacterStatus;
   species: string;
   type: string;
-  gender: "Female" | "Male" | "Genderless" | "unknown";
+  gender: CharacterGender;
   origin: Origin;
   location: Location;
   image: string;

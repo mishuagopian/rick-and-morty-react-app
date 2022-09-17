@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { Character } from "../models/Character";
+import { CharacterStateFilters } from "../feature/charactersSlice";
 
 const API_URL = "https://rickandmortyapi.com/api";
 
@@ -16,6 +17,13 @@ export interface GetCharactersResponse {
   results: Character[];
 }
 
-// TODO: Implement filters
-export const getCharacters = async (page = 0): Promise<GetCharactersResponse> =>
-  axios.get(`${API_URL}/character?page=${page}`).then(({ data }) => data);
+export const getCharacters = async (
+  filters: CharacterStateFilters,
+  page = 0
+): Promise<GetCharactersResponse> => {
+  let url = `${API_URL}/character?page=${page}`;
+  url = filters.name ? `${url}&name=${filters.name}` : url;
+  url = filters.status ? `${url}&status=${filters.status.toLowerCase()}` : url;
+  url = filters.gender ? `${url}&gender=${filters.gender.toLowerCase()}` : url;
+  return axios.get(url).then(({ data }) => data);
+};

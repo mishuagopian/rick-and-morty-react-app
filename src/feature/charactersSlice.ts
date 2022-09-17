@@ -8,14 +8,14 @@ import {
 } from "../services/characters";
 
 export interface CharactersState {
-  characters: Character[];
+  values: Character[];
   info: PaginationInfo;
   loading: boolean;
   error: boolean;
 }
 
 const initialState: CharactersState = {
-  characters: [],
+  values: [],
   info: {},
   loading: false,
   error: false,
@@ -48,7 +48,7 @@ export const reservationsSlice = createSlice({
     builder.addCase(getCharacters.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.info = payload.info;
-      state.characters = payload.results;
+      state.values = payload.results;
     });
     builder.addCase(getCharacters.rejected, (state) => {
       state.loading = false;
@@ -57,6 +57,6 @@ export const reservationsSlice = createSlice({
   },
 });
 
-export const {} = reservationsSlice.actions;
+// export const {} = reservationsSlice.actions;
 
 export default reservationsSlice.reducer;

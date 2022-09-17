@@ -61,6 +61,7 @@ const CharactersListScreen = (): JSX.Element => {
             <Box sx={styles.list}>
               {characters.map(({ id, name, status, species, image }) => (
                 <CharacterCard
+                  id={id}
                   key={id}
                   name={name}
                   status={status}

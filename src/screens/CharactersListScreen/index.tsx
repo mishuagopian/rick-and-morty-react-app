@@ -10,7 +10,6 @@ import {
 
 import { getCharacters, setPage } from "../../feature/charactersSlice";
 import { AppDispatch, RootState } from "../../app/store";
-import PageContainer from "../../components/PageContainer";
 import ScrollToTop from "../../components/ScrollToTop";
 
 import ResponsiveDrawer from "./components/ResponsiveDrawer";
@@ -50,7 +49,7 @@ const CharactersListScreen = (): JSX.Element => {
 
   return (
     // TODO: Implement Left button to open Responsive Drawer
-    <PageContainer>
+    <>
       <div id={scrollToTopAnchorId} />
       <ResponsiveDrawer />
       <Box sx={styles.container(responsive, drawerWidth)}>
@@ -84,7 +83,7 @@ const CharactersListScreen = (): JSX.Element => {
         )}
       </Box>
       <ScrollToTop anchorSelector={`#${scrollToTopAnchorId}`} />
-    </PageContainer>
+    </>
   );
 };
 

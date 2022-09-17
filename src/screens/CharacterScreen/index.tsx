@@ -6,7 +6,6 @@ import { Box, Container, Card, CardMedia, Typography } from "@mui/material";
 import { AppDispatch, RootState } from "../../app/store";
 import { getCharacter } from "../../feature/characterSlice";
 
-import PageContainer from "../../components/PageContainer";
 import Description from "./components/Description";
 import EpisodesTabs from "./components/EpisodesTabs";
 
@@ -23,7 +22,7 @@ const CharacterScreen = (): JSX.Element => {
 
   return (
     // TODO: Implement Left button to go back in history
-    <PageContainer>
+    <>
       <Container sx={styles.container}>
         <Card sx={styles.card}>
           <CardMedia
@@ -47,7 +46,7 @@ const CharacterScreen = (): JSX.Element => {
         </Box>
       </Container>
       <EpisodesTabs />
-    </PageContainer>
+    </>
   );
 };
 

@@ -13,15 +13,21 @@ import {
 } from "./constants/routes";
 import CharactersListScreen from "./screens/CharactersListScreen";
 import CharacterScreen from "./screens/CharacterScreen";
+import PageContainer from "./components/PageContainer";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path={charactersPath} element={<CharactersListScreen />} />
-        <Route path={characterPath} element={<CharacterScreen />} />
-        <Route path={wildcardPath} element={<Navigate to={charactersPath} />} />
-      </Routes>
+      <PageContainer>
+        <Routes>
+          <Route path={charactersPath} element={<CharactersListScreen />} />
+          <Route path={characterPath} element={<CharacterScreen />} />
+          <Route
+            path={wildcardPath}
+            element={<Navigate to={charactersPath} />}
+          />
+        </Routes>
+      </PageContainer>
     </Router>
   );
 }

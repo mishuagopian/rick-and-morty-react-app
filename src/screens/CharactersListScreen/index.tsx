@@ -1,6 +1,12 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Pagination, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Pagination,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 import { getCharacters, setPage } from "../../feature/charactersSlice";
 import { AppDispatch, RootState } from "../../app/store";
@@ -18,6 +24,10 @@ const CharactersListScreen = (): JSX.Element => {
   const characters = useSelector((state: RootState) => state.characters.values);
   const pagesInfo = useSelector((state: RootState) => state.characters.info);
   const filters = useSelector((state: RootState) => state.characters.filters);
+  const error = useSelector((state: RootState) => state.characters.error);
+  const errorMessage = useSelector(
+    (state: RootState) => state.characters.errorMessage
+  );
   const currentPage = useSelector(
     (state: RootState) => state.characters.currentPage
   );
@@ -44,27 +54,35 @@ const CharactersListScreen = (): JSX.Element => {
       <div id={scrollToTopAnchorId} />
       <ResponsiveDrawer />
       <Box sx={styles.container(responsive, drawerWidth)}>
-        <Box sx={styles.list}>
-          {characters.map(({ id, name, status, species, image }) => (
-            <CharacterCard
-              key={id}
-              name={name}
-              status={status}
-              species={species}
-              image={image}
-            />
-          ))}
-        </Box>
-        <Pagination
-          sx={styles.pagination}
-          page={currentPage}
-          count={pagesInfo.pages}
-          onChange={handlePageChange}
-          showFirstButton
-          showLastButton
-          color="primary"
-          disabled={loading}
-        />
+        {error ? (
+          <Typography sx={styles.error}>{errorMessage}</Typography>
+        ) : (
+          <>
+            <Box sx={styles.list}>
+              {characters.map(({ id, name, status, species, image }) => (
+                <CharacterCard
+                  key={id}
+                  name={name}
+                  status={status}
+                  species={species}
+                  image={image}
+                />
+              ))}
+            </Box>
+            {!!pagesInfo?.pages && pagesInfo?.pages > 1 && (
+              <Pagination
+                sx={styles.pagination}
+                page={currentPage}
+                count={pagesInfo.pages}
+                onChange={handlePageChange}
+                showFirstButton
+                showLastButton
+                color="primary"
+                disabled={loading}
+              />
+            )}
+          </>
+        )}
       </Box>
       <ScrollToTop anchorSelector={`#${scrollToTopAnchorId}`} />
     </PageContainer>

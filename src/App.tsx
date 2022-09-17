@@ -5,7 +5,6 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { CssBaseline } from "@mui/material";
 
 import {
   wildcardPath,
@@ -17,18 +16,13 @@ import CharacterScreen from "./screens/CharacterScreen";
 
 function App() {
   return (
-    <CssBaseline>
-      <Router>
-        <Routes>
-          <Route path={charactersPath} element={<CharactersListScreen />} />
-          <Route path={characterPath} element={<CharacterScreen />} />
-          <Route
-            path={wildcardPath}
-            element={<Navigate to={charactersPath} />}
-          />
-        </Routes>
-      </Router>
-    </CssBaseline>
+    <Router>
+      <Routes>
+        <Route path={charactersPath} element={<CharactersListScreen />} />
+        <Route path={characterPath} element={<CharacterScreen />} />
+        <Route path={wildcardPath} element={<Navigate to={charactersPath} />} />
+      </Routes>
+    </Router>
   );
 }
 

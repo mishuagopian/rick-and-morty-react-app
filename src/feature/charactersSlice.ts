@@ -26,6 +26,7 @@ export interface CharactersState {
   currentPage: number;
   loading: boolean;
   error: boolean;
+  errorMessage?: string;
 }
 
 const initialState: CharactersState = {
@@ -48,9 +49,9 @@ export const getCharacters = createAsyncThunk(
       const { info, results } = await fetchCharacters(filters, currentPage);
       return { info, results } as GetCharactersResponse;
     } catch (e) {
-      const error = `error: ${e}`;
-      console.log(error);
-      return thunkAPI.rejectWithValue(error);
+      console.log(`error: ${e}`);
+      // Asuming everything is 404 Not found
+      return thunkAPI.rejectWithValue("No results!");
     }
   }
 );
@@ -85,9 +86,12 @@ export const reservationsSlice = createSlice({
       state.info = payload.info;
       state.values = payload.results;
     });
-    builder.addCase(getCharacters.rejected, (state) => {
+    builder.addCase(getCharacters.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = true;
+      state.errorMessage = payload as string;
+      state.values = initialState.values;
+      state.info = initialState.info;
     });
   },
 });

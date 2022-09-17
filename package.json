@@ -12,6 +12,9 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.5",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -40,8 +43,6 @@
     ]
   },
   "devDependencies": {
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "eslint": "^8.23.0",
@@ -54,6 +55,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.7",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
   },
   "eslintConfig": {
@@ -65,7 +68,11 @@
       "plugin:prettier/recommended",
       "plugin:import/recommended"
     ],
-    "plugins": ["react", "@typescript-eslint", "jest"],
+    "plugins": [
+      "react",
+      "@typescript-eslint",
+      "jest"
+    ],
     "env": {
       "browser": true,
       "es6": true,

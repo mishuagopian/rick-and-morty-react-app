@@ -17,7 +17,5 @@ export interface GetCharactersResponse {
 }
 
 // TODO: Implement filters
-export const getCharacters = async (
-  url = API_URL
-): Promise<GetCharactersResponse> =>
-  axios.get(`${url}/character`).then(({ data }) => data);
+export const getCharacters = async (page = 0): Promise<GetCharactersResponse> =>
+  axios.get(`${API_URL}/character?page=${page}`).then(({ data }) => data);

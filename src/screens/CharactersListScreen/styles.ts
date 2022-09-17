@@ -1,8 +1,17 @@
 export const styles = {
-  list: (responsive: boolean, drawerWidth: string) => ({
+  container: (responsive: boolean, drawerWidth: string) => ({
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    paddingLeft: responsive ? drawerWidth : 0,
+    marginBottom: "50px",
+  }),
+  list: {
     display: "flex",
     justifyContent: "space-evenly",
     flexWrap: "wrap",
-    paddingLeft: responsive ? drawerWidth : 0,
-  }),
+  },
+  pagination: {
+    marginTop: "25px",
+  },
 };

@@ -1,6 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+// eslint-disable-next-line import/named
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 import { Character } from "../models/Character";
+import { RootState } from "../app/store";
 import {
   getCharacters as fetchCharacters,
   GetCharactersResponse,
@@ -10,6 +12,7 @@ import {
 export interface CharactersState {
   values: Character[];
   info: PaginationInfo;
+  currentPage: number;
   loading: boolean;
   error: boolean;
 }
@@ -17,6 +20,7 @@ export interface CharactersState {
 const initialState: CharactersState = {
   values: [],
   info: {},
+  currentPage: 1,
   loading: false,
   error: false,
 };
@@ -26,7 +30,10 @@ export const getCharacters = createAsyncThunk(
   async (_, thunkAPI) => {
     // TODO: Implement filters
     try {
-      const { info, results } = await fetchCharacters();
+      const { characters } = thunkAPI.getState() as RootState;
+      const currentPage = characters.currentPage;
+
+      const { info, results } = await fetchCharacters(currentPage);
       return { info, results } as GetCharactersResponse;
     } catch (e) {
       const error = `error: ${e}`;
@@ -39,7 +46,11 @@ export const getCharacters = createAsyncThunk(
 export const reservationsSlice = createSlice({
   name: "characters",
   initialState,
-  reducers: {},
+  reducers: {
+    setPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getCharacters.pending, (state) => {
       state.loading = true;
@@ -57,6 +68,6 @@ export const reservationsSlice = createSlice({
   },
 });
 
-// export const {} = reservationsSlice.actions;
+export const { setPage } = reservationsSlice.actions;
 
 export default reservationsSlice.reducer;

@@ -14,10 +14,12 @@ import {
 import CharactersListScreen from "./screens/CharactersListScreen";
 import CharacterScreen from "./screens/CharacterScreen";
 import PageContainer from "./components/PageContainer";
+import PageOnTop from "./components/PageOnTop";
 
 function App() {
   return (
     <Router>
+      <PageOnTop />
       <PageContainer>
         <Routes>
           <Route path={charactersPath} element={<CharactersListScreen />} />

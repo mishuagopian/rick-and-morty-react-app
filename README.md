@@ -1,6 +1,19 @@
-# Getting Started with Create React App
+# Rick and Morty React APP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses [Rick and Morty public API](https://rickandmortyapi.com).
+
+## Details
+
+### Stack
+
+- [Create React App](https://github.com/facebook/create-react-app) as bootstrap.
+- [Redux](https://redux.js.org) to manage the app state, with Redux Toolkit.
+- [Material UI](https://mui.com) as UI Library.
+- [TypeScript](https://www.typescriptlang.org) for types.
+
+### Demo
+
+Site is deployed in [this URL](https://oxf2n-iaaaa-aaaad-qd33a-cai.ic.fleek.co).
 
 ## Available Scripts
 

@@ -5,8 +5,10 @@ import { Box, Divider, Tabs, Tab, useTheme } from "@mui/material";
 import { AppDispatch, RootState } from "../../../../app/store";
 import { getEpisode } from "../../../../feature/characterSlice";
 
-import { styles } from "./styles";
+import Loading from "../../../../components/Loading";
 import Description from "../Description";
+
+import { styles } from "./styles";
 
 const EpisodesTabs = (): JSX.Element | null => {
   const theme = useTheme();
@@ -59,7 +61,9 @@ const EpisodesTabs = (): JSX.Element | null => {
         ))}
       </Tabs>
       <Divider sx={styles.divider} />
-      {!episodeLoading && (
+      {episodeLoading ? (
+        <Loading />
+      ) : (
         <>
           <Description center title="Episode ID" value={episode.id} />
           <Description center title="Episode Name" value={episode.name} />

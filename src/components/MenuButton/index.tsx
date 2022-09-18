@@ -13,7 +13,7 @@ const MenuButton = () => {
   }, [dispatch]);
 
   return (
-    <IconButton aria-label="back" color="inherit" onClick={handleClick}>
+    <IconButton aria-label="menu" color="inherit" onClick={handleClick}>
       <MenuIcon />
     </IconButton>
   );

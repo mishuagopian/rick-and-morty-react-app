@@ -76,6 +76,9 @@ export const characterSlice = createSlice({
     builder.addCase(getCharacter.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.value = payload;
+      state.value.created = payload.created?.length
+        ? new Date(payload.created).toDateString()
+        : "";
     });
     builder.addCase(getCharacter.rejected, (state, { payload }) => {
       state.loading = false;

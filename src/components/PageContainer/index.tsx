@@ -6,15 +6,11 @@ import { styles } from "./styles";
 
 interface PageContainerProps {
   children?: React.ReactNode;
-  LeftComponent?: React.ReactNode;
 }
 
-const PageContainer = ({
-  LeftComponent,
-  children,
-}: PageContainerProps): JSX.Element => (
+const PageContainer = ({ children }: PageContainerProps): JSX.Element => (
   <>
-    <AppBar LeftComponent={LeftComponent} />
+    <AppBar />
     <Box component="main" sx={styles(appBarHeight)}>
       {children}
     </Box>

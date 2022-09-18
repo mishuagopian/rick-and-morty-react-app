@@ -55,7 +55,7 @@ export const getCharacters = createAsyncThunk(
   }
 );
 
-export const reservationsSlice = createSlice({
+export const charactersSlice = createSlice({
   name: "characters",
   initialState,
   reducers: {
@@ -96,6 +96,6 @@ export const reservationsSlice = createSlice({
 });
 
 export const { setPage, setNameFilter, setGenderFilter, setStatusFilter } =
-  reservationsSlice.actions;
+  charactersSlice.actions;
 
-export default reservationsSlice.reducer;
+export default charactersSlice.reducer;

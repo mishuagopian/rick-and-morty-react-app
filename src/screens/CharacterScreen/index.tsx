@@ -5,6 +5,7 @@ import { Box, Container, Card, CardMedia, Typography } from "@mui/material";
 
 import { AppDispatch, RootState } from "../../app/store";
 import { getCharacter } from "../../feature/characterSlice";
+import { showBackButton } from "../../feature/appBarSlice";
 
 import Description from "./components/Description";
 import EpisodesTabs from "./components/EpisodesTabs";
@@ -18,10 +19,13 @@ const CharacterScreen = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(getCharacter(id));
+    dispatch(showBackButton(true));
+    return () => {
+      dispatch(showBackButton(false));
+    };
   }, [dispatch, id]);
 
   return (
-    // TODO: Implement Left button to go back in history
     <>
       <Container sx={styles.container}>
         <Card sx={styles.card}>

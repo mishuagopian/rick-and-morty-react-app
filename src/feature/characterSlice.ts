@@ -53,7 +53,7 @@ export const getCharacter = createAsyncThunk(
   }
 );
 
-export const reservationsSlice = createSlice({
+export const characterSlice = createSlice({
   name: "characters",
   initialState,
   reducers: {},
@@ -90,6 +90,6 @@ export const reservationsSlice = createSlice({
   },
 });
 
-export const {} = reservationsSlice.actions;
+export const {} = characterSlice.actions;
 
-export default reservationsSlice.reducer;
+export default characterSlice.reducer;

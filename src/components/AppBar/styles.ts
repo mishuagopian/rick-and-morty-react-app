@@ -9,4 +9,13 @@ export const styles = {
   image: {
     height: 50,
   },
+  leftButtons: {
+    position: "absolute",
+    left: "40px",
+  },
+  toolbar: {
+    justifyContent: "center",
+    width: "100%",
+    display: "flex",
+  },
 } as const;

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -7,6 +7,8 @@ import {
   ListItem,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 
 import Select from "../../../../components/Select";
@@ -22,17 +24,24 @@ import {
   CharacterGender,
   CharacterStatus,
 } from "../../../../models/Character";
+import {
+  showMenuButton,
+  showMenu as setShowMenu,
+} from "../../../../feature/appBarSlice";
 
 import { styles } from "./styles";
 
 const ResponsiveDrawer = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const filters = useSelector((state: RootState) => state.characters.filters);
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const theme = useTheme();
+  const responsive = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const filters = useSelector((state: RootState) => state.characters.filters);
+  const { showMenu } = useSelector((state: RootState) => state.appBar);
+
+  const dismissMenu = useCallback(() => {
+    dispatch(setShowMenu(false));
+  }, [dispatch]);
 
   // TODO: Add debounce/throttle
   // Couldn't create a single handler as MUI does not send target's name
@@ -55,49 +64,68 @@ const ResponsiveDrawer = () => {
     [dispatch]
   );
 
-  const filtersList = (
-    <List sx={styles.filtersList}>
-      <Typography gutterBottom variant="h6">
-        Filter by
-      </Typography>
-      <ListItem key="search">
-        <TextField
-          id="outlined-search"
-          label="Name"
-          type="search"
-          value={filters.name}
-          onChange={handleNameChange}
-          fullWidth
-        />
-      </ListItem>
-      <ListItem key="gender">
-        <Select
-          label="Gender"
-          items={genders}
-          value={filters.gender}
-          onChange={handleGenderChange}
-          fullWidth
-        />
-      </ListItem>
-      <ListItem key="status">
-        <Select
-          label="Status"
-          items={status}
-          value={filters.status}
-          onChange={handleStatusChange}
-          fullWidth
-        />
-      </ListItem>
-    </List>
+  const filtersList = useMemo(
+    () => (
+      <List sx={styles.filtersList}>
+        <Typography gutterBottom variant="h6">
+          Filter by
+        </Typography>
+        <ListItem key="search">
+          <TextField
+            id="outlined-search"
+            label="Name"
+            type="search"
+            value={filters.name}
+            onChange={handleNameChange}
+            fullWidth
+          />
+        </ListItem>
+        <ListItem key="gender">
+          <Select
+            label="Gender"
+            items={genders}
+            value={filters.gender}
+            onChange={handleGenderChange}
+            fullWidth
+          />
+        </ListItem>
+        <ListItem key="status">
+          <Select
+            label="Status"
+            items={status}
+            value={filters.status}
+            onChange={handleStatusChange}
+            fullWidth
+          />
+        </ListItem>
+      </List>
+    ),
+    [
+      filters.gender,
+      filters.name,
+      filters.status,
+      handleGenderChange,
+      handleNameChange,
+      handleStatusChange,
+    ]
   );
+
+  useEffect(() => {
+    if (responsive) {
+      dispatch(showMenuButton(true));
+      return () => {
+        dispatch(showMenuButton(false));
+      };
+    }
+  }, [dispatch, responsive]);
 
   return (
     <Box>
       <Box component="nav" sx={styles.nav} aria-label="mailbox folders">
         <Drawer
           variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
+          open={showMenu}
+          onClose={dismissMenu}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}

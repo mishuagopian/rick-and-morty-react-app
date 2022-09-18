@@ -48,7 +48,6 @@ const CharactersListScreen = (): JSX.Element => {
   }, [dispatch, currentPage, filters]);
 
   return (
-    // TODO: Implement Left button to open Responsive Drawer
     <>
       <div id={scrollToTopAnchorId} />
       <ResponsiveDrawer />

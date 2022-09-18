@@ -15,6 +15,7 @@ import ScrollToTop from "../../components/ScrollToTop";
 import ResponsiveDrawer from "./components/ResponsiveDrawer";
 import CharacterCard from "./components/CharacterCard";
 
+import LoadingSkeleton from "./components/LoadingSkeleton";
 import { drawerWidth } from "./components/ResponsiveDrawer/styles";
 import { styles } from "./styles";
 
@@ -52,7 +53,9 @@ const CharactersListScreen = (): JSX.Element => {
       <div id={scrollToTopAnchorId} />
       <ResponsiveDrawer />
       <Box sx={styles.container(responsive, drawerWidth)}>
-        {error ? (
+        {loading ? (
+          <LoadingSkeleton />
+        ) : error ? (
           <Typography sx={styles.error}>{errorMessage}</Typography>
         ) : (
           <>

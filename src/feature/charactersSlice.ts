@@ -15,8 +15,8 @@ import {
 
 export interface CharacterStateFilters {
   name?: string;
-  status?: CharacterStatus;
-  gender?: CharacterGender;
+  status?: CharacterStatus | "";
+  gender?: CharacterGender | "";
 }
 
 export interface CharactersState {
@@ -32,7 +32,11 @@ export interface CharactersState {
 const initialState: CharactersState = {
   values: [],
   info: {},
-  filters: {},
+  filters: {
+    name: "",
+    status: "",
+    gender: "",
+  },
   currentPage: 1,
   loading: false,
   error: false,
@@ -61,6 +65,10 @@ export const charactersSlice = createSlice({
   reducers: {
     setPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
+    },
+    clearFilters: (state) => {
+      state.currentPage = initialState.currentPage;
+      state.filters = initialState.filters;
     },
     setNameFilter: (state, action: PayloadAction<string>) => {
       state.currentPage = initialState.currentPage;
@@ -95,7 +103,12 @@ export const charactersSlice = createSlice({
   },
 });
 
-export const { setPage, setNameFilter, setGenderFilter, setStatusFilter } =
-  charactersSlice.actions;
+export const {
+  clearFilters,
+  setPage,
+  setNameFilter,
+  setGenderFilter,
+  setStatusFilter,
+} = charactersSlice.actions;
 
 export default charactersSlice.reducer;

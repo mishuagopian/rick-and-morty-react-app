@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   Drawer,
+  Link,
   List,
   ListItem,
   TextField,
@@ -13,6 +14,7 @@ import {
 
 import Select from "../../../../components/Select";
 import {
+  clearFilters,
   setNameFilter,
   setGenderFilter,
   setStatusFilter,
@@ -41,6 +43,10 @@ const ResponsiveDrawer = () => {
 
   const dismissMenu = useCallback(() => {
     dispatch(setShowMenu(false));
+  }, [dispatch]);
+
+  const handleClearFilters = useCallback(() => {
+    dispatch(clearFilters());
   }, [dispatch]);
 
   // TODO: Add debounce/throttle
@@ -98,6 +104,24 @@ const ResponsiveDrawer = () => {
             fullWidth
           />
         </ListItem>
+        <ListItem key="clear">
+          <Link
+            component="button"
+            aria-label="clear filters"
+            onClick={handleClearFilters}
+          >
+            Clear filters
+          </Link>
+        </ListItem>
+        <ListItem key="dismiss" sx={styles.clearFilters}>
+          <Link
+            component="button"
+            aria-label="dismiss filters menu"
+            onClick={dismissMenu}
+          >
+            Dismiss menu
+          </Link>
+        </ListItem>
       </List>
     ),
     [
@@ -107,6 +131,8 @@ const ResponsiveDrawer = () => {
       handleGenderChange,
       handleNameChange,
       handleStatusChange,
+      handleClearFilters,
+      dismissMenu,
     ]
   );
 

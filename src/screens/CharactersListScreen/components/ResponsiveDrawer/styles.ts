@@ -26,4 +26,10 @@ export const styles = {
     },
     zIndex: (theme: { zIndex: { drawer: number } }) => theme.zIndex.drawer + 2,
   },
+  clearFilters: (theme: any) => ({
+    display: "none",
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+    },
+  }),
 };

@@ -56,7 +56,16 @@ export const getCharacter = createAsyncThunk(
 export const characterSlice = createSlice({
   name: "characters",
   initialState,
-  reducers: {},
+  reducers: {
+    clearState: (state) => {
+      state.loading = initialState.loading;
+      state.error = initialState.error;
+      state.value = initialState.value;
+      state.episode = initialState.episode;
+      state.episodeLoading = initialState.episodeLoading;
+      state.episodeError = initialState.episodeError;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getCharacter.pending, (state) => {
       state.loading = true;
@@ -90,6 +99,6 @@ export const characterSlice = createSlice({
   },
 });
 
-export const {} = characterSlice.actions;
+export const { clearState } = characterSlice.actions;
 
 export default characterSlice.reducer;

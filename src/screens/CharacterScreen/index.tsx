@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Box, Container, Card, CardMedia, Typography } from "@mui/material";
 
 import { AppDispatch, RootState } from "../../app/store";
-import { getCharacter } from "../../feature/characterSlice";
+import { getCharacter, clearState } from "../../feature/characterSlice";
 import { showBackButton } from "../../feature/appBarSlice";
 import { charactersPath } from "../../constants/routes";
 
@@ -16,6 +16,7 @@ import { styles } from "./styles";
 
 const CharacterScreen = (): JSX.Element => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const character = useSelector((state: RootState) => state.character.value);
   const loading = useSelector((state: RootState) => state.character.loading);
@@ -34,7 +35,9 @@ const CharacterScreen = (): JSX.Element => {
   }
 
   if (error) {
-    return <Navigate to={charactersPath} />;
+    dispatch(clearState());
+    navigate(charactersPath);
+    return <LoadingSkeleton />;
   }
 
   return (

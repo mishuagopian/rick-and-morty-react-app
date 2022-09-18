@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -7,6 +7,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { debounce } from "lodash";
 
 import useScrollTo from "../../hooks/useScrollTo";
 import { getCharacters, setPage } from "../../feature/charactersSlice";
@@ -47,9 +48,14 @@ const CharactersListScreen = (): JSX.Element => {
     [dispatch]
   );
 
+  const debouncedGetCharacters = useMemo(
+    () => debounce(async () => dispatch(getCharacters()), 300),
+    [dispatch]
+  );
+
   useEffect(() => {
-    dispatch(getCharacters());
-  }, [dispatch, currentPage, filters]);
+    debouncedGetCharacters();
+  }, [dispatch, currentPage, filters, debouncedGetCharacters]);
 
   useEffect(() => {
     scrollTo(scrollToTopFabAnchorSelector);

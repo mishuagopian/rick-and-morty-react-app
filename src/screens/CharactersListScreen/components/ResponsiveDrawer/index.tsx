@@ -49,7 +49,6 @@ const ResponsiveDrawer = () => {
     dispatch(clearFilters());
   }, [dispatch]);
 
-  // TODO: Add debounce/throttle
   // Couldn't create a single handler as MUI does not send target's name
   const handleNameChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -8,6 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 
+import useScrollTo from "../../hooks/useScrollTo";
 import { getCharacters, setPage } from "../../feature/charactersSlice";
 import { AppDispatch, RootState } from "../../app/store";
 import ScrollToTopFab from "../../components/ScrollToTopFab";
@@ -32,7 +33,9 @@ const CharactersListScreen = (): JSX.Element => {
     (state: RootState) => state.characters.currentPage
   );
   const loading = useSelector((state: RootState) => state.characters.loading);
-  const ScrollToTopFabAnchorId = "scroll-to-top-anchor";
+  const scrollTo = useScrollTo();
+  const scrollToTopFabAnchorId = "scroll-to-top-anchor";
+  const scrollToTopFabAnchorSelector = `#${scrollToTopFabAnchorId}`;
 
   const theme = useTheme();
   const responsive = useMediaQuery(theme.breakpoints.up("sm"));
@@ -48,12 +51,16 @@ const CharactersListScreen = (): JSX.Element => {
     dispatch(getCharacters());
   }, [dispatch, currentPage, filters]);
 
+  useEffect(() => {
+    scrollTo(scrollToTopFabAnchorSelector);
+  }, [characters, scrollToTopFabAnchorSelector, scrollTo]);
+
   return (
     <>
-      <div id={ScrollToTopFabAnchorId} />
+      <div id={scrollToTopFabAnchorId} />
       <ResponsiveDrawer />
       <Box sx={styles.container(responsive, drawerWidth)}>
-        {loading ? (
+        {loading && !characters?.length ? (
           <LoadingSkeleton />
         ) : error ? (
           <Typography sx={styles.error}>{errorMessage}</Typography>
@@ -84,7 +91,7 @@ const CharactersListScreen = (): JSX.Element => {
           </>
         )}
       </Box>
-      <ScrollToTopFab anchorSelector={`#${ScrollToTopFabAnchorId}`} />
+      <ScrollToTopFab anchorSelector={scrollToTopFabAnchorSelector} />
     </>
   );
 };

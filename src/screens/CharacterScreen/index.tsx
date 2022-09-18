@@ -9,6 +9,7 @@ import { showBackButton } from "../../feature/appBarSlice";
 
 import Description from "./components/Description";
 import EpisodesTabs from "./components/EpisodesTabs";
+import LoadingSkeleton from "./components/LoadingSkeleton";
 
 import { styles } from "./styles";
 
@@ -16,6 +17,7 @@ const CharacterScreen = (): JSX.Element => {
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   const character = useSelector((state: RootState) => state.character.value);
+  const loading = useSelector((state: RootState) => state.character.loading);
 
   useEffect(() => {
     dispatch(getCharacter(id));
@@ -24,6 +26,10 @@ const CharacterScreen = (): JSX.Element => {
       dispatch(showBackButton(false));
     };
   }, [dispatch, id]);
+
+  if (loading) {
+    return <LoadingSkeleton />;
+  }
 
   return (
     <>

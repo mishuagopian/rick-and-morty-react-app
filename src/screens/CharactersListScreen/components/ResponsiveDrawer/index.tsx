@@ -41,7 +41,7 @@ const ResponsiveDrawer = () => {
   const filters = useSelector((state: RootState) => state.characters.filters);
   const { showMenu } = useSelector((state: RootState) => state.appBar);
 
-  const dismissMenu = useCallback(() => {
+  const closeMenu = useCallback(() => {
     dispatch(setShowMenu(false));
   }, [dispatch]);
 
@@ -112,13 +112,13 @@ const ResponsiveDrawer = () => {
             Clear filters
           </Link>
         </ListItem>
-        <ListItem key="dismiss" sx={styles.clearFilters}>
+        <ListItem key="close" sx={styles.clearFilters}>
           <Link
             component="button"
-            aria-label="dismiss filters menu"
-            onClick={dismissMenu}
+            aria-label="close filters menu"
+            onClick={closeMenu}
           >
-            Dismiss menu
+            Close menu
           </Link>
         </ListItem>
       </List>
@@ -131,7 +131,7 @@ const ResponsiveDrawer = () => {
       handleNameChange,
       handleStatusChange,
       handleClearFilters,
-      dismissMenu,
+      closeMenu,
     ]
   );
 
@@ -150,7 +150,7 @@ const ResponsiveDrawer = () => {
         <Drawer
           variant="temporary"
           open={showMenu}
-          onClose={dismissMenu}
+          onClose={closeMenu}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}

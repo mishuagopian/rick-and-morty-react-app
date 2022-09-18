@@ -1,12 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Box,
-  Pagination,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Pagination, useMediaQuery, useTheme } from "@mui/material";
 import { debounce } from "lodash";
 
 import useScrollTo from "../../hooks/useScrollTo";
@@ -14,6 +8,7 @@ import { getCharacters, setPage } from "../../feature/charactersSlice";
 import { AppDispatch, RootState } from "../../app/store";
 import ScrollToTopFab from "../../components/ScrollToTopFab";
 
+import NoResults from "../../components/NoResults";
 import ResponsiveDrawer from "./components/ResponsiveDrawer";
 import CharacterCard from "./components/CharacterCard";
 
@@ -69,7 +64,7 @@ const CharactersListScreen = (): JSX.Element => {
         {loading && !characters?.length ? (
           <LoadingSkeleton />
         ) : error ? (
-          <Typography sx={styles.error}>{errorMessage}</Typography>
+          <NoResults />
         ) : (
           <>
             <Box sx={styles.list}>

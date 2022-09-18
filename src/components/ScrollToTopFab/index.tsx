@@ -11,11 +11,13 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import { styles } from "./styles";
 
-interface ScrollToTopProps {
+interface ScrollToTopFabProps {
   anchorSelector: string;
 }
 
-const ScrollToTop = ({ anchorSelector }: ScrollToTopProps): JSX.Element => {
+const ScrollToTopFab = ({
+  anchorSelector,
+}: ScrollToTopFabProps): JSX.Element => {
   const theme = useTheme();
   const fullscreen = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -48,4 +50,4 @@ const ScrollToTop = ({ anchorSelector }: ScrollToTopProps): JSX.Element => {
   );
 };
 
-export default ScrollToTop;
+export default ScrollToTopFab;

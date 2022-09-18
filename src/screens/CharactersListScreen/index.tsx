@@ -10,7 +10,7 @@ import {
 
 import { getCharacters, setPage } from "../../feature/charactersSlice";
 import { AppDispatch, RootState } from "../../app/store";
-import ScrollToTop from "../../components/ScrollToTop";
+import ScrollToTopFab from "../../components/ScrollToTopFab";
 
 import ResponsiveDrawer from "./components/ResponsiveDrawer";
 import CharacterCard from "./components/CharacterCard";
@@ -32,7 +32,7 @@ const CharactersListScreen = (): JSX.Element => {
     (state: RootState) => state.characters.currentPage
   );
   const loading = useSelector((state: RootState) => state.characters.loading);
-  const scrollToTopAnchorId = "scroll-to-top-anchor";
+  const ScrollToTopFabAnchorId = "scroll-to-top-anchor";
 
   const theme = useTheme();
   const responsive = useMediaQuery(theme.breakpoints.up("sm"));
@@ -50,7 +50,7 @@ const CharactersListScreen = (): JSX.Element => {
 
   return (
     <>
-      <div id={scrollToTopAnchorId} />
+      <div id={ScrollToTopFabAnchorId} />
       <ResponsiveDrawer />
       <Box sx={styles.container(responsive, drawerWidth)}>
         {loading ? (
@@ -84,7 +84,7 @@ const CharactersListScreen = (): JSX.Element => {
           </>
         )}
       </Box>
-      <ScrollToTop anchorSelector={`#${scrollToTopAnchorId}`} />
+      <ScrollToTopFab anchorSelector={`#${ScrollToTopFabAnchorId}`} />
     </>
   );
 };

@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
+import useScrollTo from "../../hooks/useScrollTo";
+
 import { styles } from "./styles";
 
 interface ScrollToTopFabProps {
@@ -20,24 +22,12 @@ const ScrollToTopFab = ({
 }: ScrollToTopFabProps): JSX.Element => {
   const theme = useTheme();
   const fullscreen = useMediaQuery(theme.breakpoints.up("md"));
-
   const trigger = useScrollTrigger({ disableHysteresis: true });
+  const scrollTo = useScrollTo();
 
-  const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      const anchor = (
-        (event.target as HTMLDivElement).ownerDocument || document
-      ).querySelector(anchorSelector);
-
-      if (anchor) {
-        anchor.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }
-    },
-    [anchorSelector]
-  );
+  const handleClick = useCallback(() => {
+    scrollTo(anchorSelector);
+  }, [scrollTo, anchorSelector]);
 
   return (
     <Fade in={trigger}>

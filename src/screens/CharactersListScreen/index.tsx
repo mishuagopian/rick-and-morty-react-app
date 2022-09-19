@@ -22,13 +22,11 @@ const CharactersListScreen = (): JSX.Element => {
   const pagesInfo = useSelector((state: RootState) => state.characters.info);
   const filters = useSelector((state: RootState) => state.characters.filters);
   const error = useSelector((state: RootState) => state.characters.error);
-  const errorMessage = useSelector(
-    (state: RootState) => state.characters.errorMessage
-  );
   const currentPage = useSelector(
     (state: RootState) => state.characters.currentPage
   );
   const loading = useSelector((state: RootState) => state.characters.loading);
+
   const scrollTo = useScrollTo();
   const scrollToTopFabAnchorId = "scroll-to-top-anchor";
   const scrollToTopFabAnchorSelector = `#${scrollToTopFabAnchorId}`;

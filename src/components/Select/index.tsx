@@ -6,6 +6,8 @@ import {
   MenuItem,
 } from "@mui/material";
 
+import { styles } from "./styles";
+
 interface SelectProps {
   fullWidth: boolean;
   items: readonly string[];
@@ -42,7 +44,7 @@ const Select = ({
       >
         <MenuItem value={""}>All</MenuItem>
         {formattedItems.map((item) => (
-          <MenuItem key={item.key} value={item.value}>
+          <MenuItem sx={styles.item} key={item.key} value={item.value}>
             {item.label}
           </MenuItem>
         ))}

@@ -10,6 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [Redux](https://redux.js.org) to manage the app state, with Redux Toolkit.
 - [Material UI](https://mui.com) as UI Library.
 - [TypeScript](https://www.typescriptlang.org) for types.
+- [Axios](https://github.com/axios/axios) with basic [in-memory cache interceptor](https://axios-cache-interceptor.js.org/#/pages/storages) for requests. See [api definition](./src/services/api.ts) for strategy clarification.
 
 ### Demo
 
